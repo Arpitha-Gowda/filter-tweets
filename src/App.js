@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import tweetService from './services/tweets';
+import Tags from './components/tags'; 
 
-function App() {
+const App = () => {
+  const [ tags, setTags] = useState([])
+
+  useEffect(() => {
+    tweetService
+    .getTags()
+      .then(response => {
+        setTags(response._embedded.tag)
+      })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main'>
+          <Tags tags={tags} setTags={setTags} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

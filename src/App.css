@@ -34,6 +34,7 @@
     font-size: 16px;
     cursor: pointer;
     text-align: center;
+    outline:none;
   }
   
 .block:hover {
